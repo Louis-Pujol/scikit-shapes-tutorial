@@ -45,7 +45,7 @@ jobs:
         - name: Install necessary packages
           run: |
             pip install -r requirements.txt
-            pip install -r requirements_docs.txt
+            pip install -r requirements_doc.txt
 
         # https://github.com/pyvista/setup-headless-display-action
         - name: Setup headless display
