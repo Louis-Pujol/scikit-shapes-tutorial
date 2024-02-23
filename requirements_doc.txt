@@ -4,3 +4,10 @@ myst_parser
 sphinx-copybutton
 sphinx-gallery
 sphinx-design
+
+ipython
+jupyterlab
+trame
+trame_vtk
+trame_vuetify
+
