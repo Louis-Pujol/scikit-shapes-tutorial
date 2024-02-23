@@ -53,8 +53,7 @@ jobs:
 
         - name: build documentation (pull request or push)
           run: |
-            cd doc
-            sphinx-build -b html . _build/
+            sphinx-build -b html doc _build/
 
 
         - name: Deploy to GitHub Pages
