@@ -163,3 +163,5 @@ local/
 **/auto_examples/*
 doc/images/*
 doc/_build/*
+doc/sg_execution_times.rst
+script.sh

@@ -88,7 +88,7 @@ surface_mesh.plot(scalars="signal_points", cpos=cpos)
 
 # %% [markdown]
 # Add landmarks to the `PolyData`
-# ===============================
+# -------------------------------
 #
 # - Landmarks are distinguished points of the `PolyData`
 # - They can be selected via an interactive application (using vedo)
@@ -114,7 +114,7 @@ plotter.show()
 
 # %% [markdown]
 # Control points
-# ==============
+# --------------
 #
 # - Control points are represented by another `PolyData`, attached to the first
 # - The `bounding_grid` method offers a standard way to define control points as regular grids
@@ -130,7 +130,7 @@ plotter.show()
 
 # %% [markdown]
 # Save and load
-# =============
+# -------------
 #
 # - `PolyData` can be saved to the disk
 # - If the file format is `.vtk`, signals and landmarks persist when loaded back

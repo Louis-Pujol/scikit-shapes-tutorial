@@ -1,6 +1,14 @@
 from __future__ import annotations
 import importlib.metadata
 
+with open("../requirements.txt") as f:
+    skshapes_version = f.readline()
+
+install_command = f"pip install {skshapes_version}"
+rst_epilog = f".. |install_command| replace:: {install_command}"
+
+templates_path = ["templates"]
+
 # -- pyvista configuration ---------------------------------------------------
 # See: https://github.com/pyvista/pyvista/blob/main/doc/source/conf.py
 import pyvista
@@ -54,6 +62,7 @@ project = "Scikit Shapes tutorial"
 copyright = "2024, Louis Pujol"
 author = "Louis Pujol"
 version = release = ""
+html_title = "Scikit-shapes tutorial"
 
 extensions = [
     # 'sphinx_tabs.tabs',
@@ -90,6 +99,8 @@ myst_enable_extensions = [
     "colon_fence",
 ]
 
+from sphinx_gallery.sorting import FileNameSortKey
+
 sphinx_gallery_conf = {
     'examples_dirs': '../examples/',   # path to your example scripts
     'gallery_dirs': 'auto_examples',  # path to where to save gallery generated output
@@ -98,4 +109,5 @@ sphinx_gallery_conf = {
     "first_notebook_cell": "%matplotlib inline",
     "reset_modules": (reset_pyvista,),
     "reset_modules_order": "both",
+    "within_subsection_order": FileNameSortKey,
 }
