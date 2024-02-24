@@ -11,3 +11,5 @@ trame
 trame_vtk
 trame_vuetify
 
+pykeops >= 2.2.2 # otherwise trouble to generate galleries using keops as backend
+
