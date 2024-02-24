@@ -11,5 +11,7 @@ trame
 trame_vtk
 trame_vuetify
 
-pykeops >= 2.2.2 # otherwise trouble to generate galleries using keops as backend
+# otherwise trouble to generate galleries using keops as backend
+keopscore @  git+https://github.com/Louis-Pujol/keops.git@patch-syspath#subdirectory=keopscore
+pykeops @ git+https://github.com/Louis-Pujol/keops.git@patch-syspath#subdirectory=pykeops
 

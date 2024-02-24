@@ -18,14 +18,10 @@ This notebook shows how to align two triangle meshes
 #
 
 # %%
-import sys
-
 import pykeops
 import pyvista as pv
 import torch
 from pyvista import examples
-
-sys.path.append(pykeops.get_build_folder())
 
 import skshapes as sks
 
