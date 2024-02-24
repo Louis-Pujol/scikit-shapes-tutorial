@@ -45,6 +45,8 @@ jobs:
         - name: Install necessary packages
           run: |
             pip install -r requirements.txt
+            pip uninstall keopscore
+            pip uninstall pykeops
             pip install -r requirements_doc.txt
 
         # https://github.com/pyvista/setup-headless-display-action
