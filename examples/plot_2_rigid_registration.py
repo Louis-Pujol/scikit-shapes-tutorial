@@ -2,20 +2,18 @@
 The `Registration` class: rigid alignment
 ================================================================
 
-This notebook shows how to align two triangle meshes
+This notebook shows how to align two triangle meshes that are not in correspondence
 
-- Load and create `PolyData`
-- Plot `PolyData` with PyVista
-- Add a signal
-- Add landmarks
-- Add control points
-- Save the object and load it back
+- Losses: NearestNeighbors, LandmarkLoss, sum
+- Model: rigid motion
 """
 
 # %% [markdown]
-# Load two meshes representing human poses from pyvista
-# -----------------------------------------------------
+# Load and preprocess data
+# -------------------------
 #
+# Load two triangle meshes from pyvista examples and rescale them to fit in the
+# unit box.
 
 # %%
 import pykeops
@@ -53,20 +51,18 @@ plotter.show()
 # Run rigid registration
 # ----------------------
 #
+# with `NearestNeighborsLoss`.
 
 # %%
-from skshapes.loss import NearestNeighborsLoss
-from skshapes.morphing import RigidMotion
-from skshapes.tasks import Registration
 
-loss = NearestNeighborsLoss()
+loss = sks.NearestNeighborsLoss()
 # The parameter n_steps is the number of steps for the motion. For a rigid
 # motion, it has no impact on the result as the motion is fully determined by
 # a rotation matrix and a translation vector. It is however useful for
 # creating a smooth animation of the registration.
-model = RigidMotion(n_steps=5)
+model = sks.RigidMotion(n_steps=5)
 
-registration = Registration(
+registration = sks.Registration(
     model=model,
     loss=loss,
     n_iter=2,
@@ -85,7 +81,7 @@ plotter.show()
 # Add landmarks
 # -------------
 #
-# 
+#  in order to indicate left/right, up/down.
 
 # %%
 if not pv.BUILDING_GALLERY:
@@ -127,13 +123,13 @@ plotter.show()
 # Register again
 # --------------
 #
-
+# with loss = `NearestNeighborsLoss` + `LandmarkLoss`
 
 # %%
 
-loss_landmarks = NearestNeighborsLoss() + sks.LandmarkLoss()
+loss_landmarks = sks.NearestNeighborsLoss() + sks.LandmarkLoss()
 
-registration = Registration(
+registration = sks.Registration(
     model=model,
     loss=loss_landmarks,
     n_iter=2,

@@ -115,7 +115,7 @@ plotter.show()
 
 # %% [markdown]
 # Register with `ExtrinsicDeformation`
-# --------------
+# ------------------------------------
 #
 
 
