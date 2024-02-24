@@ -2,7 +2,7 @@ from __future__ import annotations
 import importlib.metadata
 
 with open("../requirements.txt") as f:
-    skshapes_version = f.readline()
+    skshapes_version = f.readline().replace(" ", "")
 
 install_command = f"pip install {skshapes_version}"
 rst_epilog = f".. |install_command| replace:: {install_command}"
