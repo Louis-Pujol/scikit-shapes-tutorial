@@ -1,19 +1,31 @@
 """
 The `Registration` class: rigid alignment
-================================================================
+=========================================
 
-This notebook shows how to align two triangle meshes that are not in correspondence
+This notebook is a first example with the registration class. We apply rigid
+registration to a pair of 3D shapes with different topologies.
 
-- Losses: NearestNeighbors, LandmarkLoss, sum
-- Model: rigid motion
+A registration is defined by :
+
+- a model: the model defines the transformation to apply to the source shape (:math:`\\text{morph}`) and an associated regularization term (:math:`\\text{reg}`)
+- a loss: the loss function measures the discrepency between the target shape and the transformed source shape.
+- an weight for the regularization term: :math:`\\lambda`:.
+
+If :math:`X` is the source shape, :math:`Y` the target shape, the criterion to optimize is:
+
+.. math::
+    \\text{loss}(\\text{morph}(X), Y) + \\lambda \\times \\text{reg}(\\text{morph})
+
+The other parameters are the optimizer, the number of iterations and the verbosity level.
 """
 
 # %% [markdown]
-# Load and preprocess data
-# -------------------------
+#Load and preprocess data
+#------------------------
 #
-# Load two triangle meshes from pyvista examples and rescale them to fit in the
-# unit box.
+#Load two triangle meshes from pyvista examples and rescale them to fit in the
+#unit box.
+#
 
 # %%
 import pykeops
@@ -51,28 +63,24 @@ plotter.add_mesh(shape2.to_pyvista(), color=color_2)
 
 plotter.show()
 
-
 # %% [markdown]
-# Run rigid registration
-# ----------------------
+#Run rigid registration
+#----------------------
 #
-# with `NearestNeighborsLoss`.
+# As points are not ordered in the same way in the two shapes, we use the `sks.NearestNeighborsLoss`,
+# it is the mean L2 distance between the closest points in the two shapes. Another possibility
+# is to use the `sks.OptimalTransportLoss` which adds a term to the loss function to minimize the distance
 
 # %%
-
 loss = sks.NearestNeighborsLoss()
-# The parameter n_steps is the number of steps for the motion. For a rigid
-# motion, it has no impact on the result as the motion is fully determined by
-# a rotation matrix and a translation vector. It is however useful for
-# creating a smooth animation of the registration.
-model = sks.RigidMotion(n_steps=5)
+model = sks.RigidMotion()
 
 registration = sks.Registration(
     model=model,
     loss=loss,
     n_iter=2,
     verbose=True,
-)
+) # default optimizer is torch.optim.LBFGS
 
 registration.fit(source=shape2, target=shape1)
 morph = registration.transform(source=shape2)
@@ -86,7 +94,8 @@ plotter.show()
 # Add landmarks
 # -------------
 #
-#  in order to indicate left/right, up/down.
+# The registration did not work well. Shapes were matched upside down.
+# With a few landmarks we can help the registration algorithm to find a better transformation.
 
 # %%
 if not pv.BUILDING_GALLERY:
@@ -125,13 +134,13 @@ plotter.show()
 
 
 # %% [markdown]
-# Register again
-# --------------
+# Register again with a loss that includes landmarks
+# --------------------------------------------------
 #
-# with loss = `NearestNeighborsLoss` + `LandmarkLoss`
+# Now the loss is the sum of `NearestNeighborsLoss` and `LandmarkLoss`, the
+# mean L2 distance between the landmarks in the two shapes.
 
 # %%
-
 loss_landmarks = sks.NearestNeighborsLoss() + sks.LandmarkLoss()
 
 registration = sks.Registration(

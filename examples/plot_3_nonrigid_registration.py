@@ -2,14 +2,16 @@
 The `Registration` class: nonrigid registration
 ===============================================
 
-This notebook show how to do nonrigid registration with `ExtrincicDeformation`
-and `IntrinsicDeformation`
+This notebook is a first example with the registration class. We apply rigid
+registration to a pair of 3D shapes with different topologies.
 """
 
 # %% [markdown]
 # Generate data
-# -----------------------------------------------------
+# -------------
 #
+
+# %%
 import skshapes as sks
 import pyvista as pv
 import torch
@@ -175,7 +177,6 @@ plotter.show()
 
 
 # %%
-
 import numpy as np
 source.control_points = source.bounding_grid(N=10, offset=0.05)
 

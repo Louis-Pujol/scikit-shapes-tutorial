@@ -2,10 +2,8 @@
 The `Multiscale` class: representing a shape at different scales
 ================================================================
 
-This notebook describes the `Multscale` class, class for representing a shape at multiple scale.
-
-- Create a `Multiscale` object from a `PolyData` object
-- Propagate signals, landmarks and control points accross scales
+This notebook describes the `Multscale` class, class for representing a shape at multiple scale and
+conserving signals, landmarks and control points across scales.
 """
 
 # %% [markdown]

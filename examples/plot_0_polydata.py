@@ -16,6 +16,7 @@ This notebook describes the `PolyData` class, the common class for point clouds,
 # `PolyData` creation
 # -------------------
 #
+# Two ways to create a `PolyData` object:
 # - from a file
 # - explicitely with `points`, `edges` (optional), `triangles` (optional)
 # - plotting with PyVista
