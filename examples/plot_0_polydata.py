@@ -30,7 +30,7 @@ cpos = [(-1.6657788922829617, 7.472045340108491, 3.9439767221656665),
 
 
 # Load a mesh from a .ply file
-mesh = sks.PolyData("../data/scape/mesh044.ply")
+mesh = sks.PolyData("data/mesh044.ply")
 
 # Extract the points, edges and triangles from the mesh
 points, edges, triangles = mesh.points, mesh.edges, mesh.triangles

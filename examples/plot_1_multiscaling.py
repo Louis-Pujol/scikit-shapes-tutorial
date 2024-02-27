@@ -18,6 +18,7 @@ This notebook describes the `Multscale` class, class for representing a shape at
 from pyvista import examples
 import pyvista as pv
 import skshapes as sks
+# sphinx_gallery_thumbnail_number = 4
 
 cpos = [(0.07817110755919496, 0.13558926405422117, 0.5210700195677971),
  (-0.01684039831161499, 0.11015420686453581, -0.0015369504690170288),
