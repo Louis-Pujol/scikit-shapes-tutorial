@@ -23,7 +23,11 @@ from pyvista import examples
 
 import skshapes as sks
 
-shape1 = sks.PolyData(examples.download_human())
+color_1 = 'tan'
+color_2 = 'brown'
+
+# shape1 = sks.PolyData(examples.download_human())
+shape1 = sks.PolyData(examples.download_woman().rotate_y(90))
 shape2 = sks.PolyData(examples.download_doorman())
 shape1.point_data.clear()
 shape2.point_data.clear()
@@ -42,8 +46,9 @@ shape2.points -= torch.min(shape2.points, dim=0).values
 shape2.points /= rescale2
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista())
-plotter.add_mesh(shape2.to_pyvista())
+plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
+plotter.add_mesh(shape2.to_pyvista(), color=color_2, **kwargs)
+
 plotter.show()
 
 
@@ -73,8 +78,8 @@ registration.fit(source=shape2, target=shape1)
 morph = registration.transform(source=shape2)
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista())
-plotter.add_mesh(morph.to_pyvista())
+plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
+plotter.add_mesh(morph.to_pyvista(), color=color_2, **kwargs)
 plotter.show()
 
 # %% [markdown]
@@ -92,15 +97,15 @@ if not pv.BUILDING_GALLERY:
     sks.LandmarkSetter([shape1, shape2]).start()
 else:
     # Set the landmarks manually
-    landmarks1 = [5199, 2278, 10013]
-    landmarks2 = [325, 786, 509]
+    landmarks1 = [4808, 147742, 1774]
+    landmarks2 = [325, 2116, 1927]
 
     shape1.landmark_indices = landmarks1
     shape2.landmark_indices = landmarks2
 
 colors = ["red", "green", "blue"]
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista())
+plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
 for i in range(len(shape1.landmark_indices)):
     plotter.add_points(
         shape1.landmark_points[i].numpy(),
@@ -108,7 +113,7 @@ for i in range(len(shape1.landmark_indices)):
         render_points_as_spheres=True,
         point_size=25,
     )
-plotter.add_mesh(shape2.to_pyvista())
+plotter.add_mesh(shape2.to_pyvista(), color=color_2, **kwargs)
 for i in range(len(shape2.landmark_indices)):
     plotter.add_points(
         shape2.landmark_points[i].numpy(),
@@ -140,6 +145,6 @@ registration.fit(source=shape2, target=shape1)
 morph = registration.transform(source=shape2)
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista())
-plotter.add_mesh(morph.to_pyvista())
+plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
+plotter.add_mesh(morph.to_pyvista(), color=color_2, **kwargs)
 plotter.show()
