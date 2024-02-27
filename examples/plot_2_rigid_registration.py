@@ -46,8 +46,8 @@ shape2.points -= torch.min(shape2.points, dim=0).values
 shape2.points /= rescale2
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
-plotter.add_mesh(shape2.to_pyvista(), color=color_2, **kwargs)
+plotter.add_mesh(shape1.to_pyvista(), color=color_1)
+plotter.add_mesh(shape2.to_pyvista(), color=color_2)
 
 plotter.show()
 
@@ -78,8 +78,8 @@ registration.fit(source=shape2, target=shape1)
 morph = registration.transform(source=shape2)
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
-plotter.add_mesh(morph.to_pyvista(), color=color_2, **kwargs)
+plotter.add_mesh(shape1.to_pyvista(), color=color_1)
+plotter.add_mesh(morph.to_pyvista(), color=color_2)
 plotter.show()
 
 # %% [markdown]
@@ -105,7 +105,7 @@ else:
 
 colors = ["red", "green", "blue"]
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
+plotter.add_mesh(shape1.to_pyvista(), color=color_1)
 for i in range(len(shape1.landmark_indices)):
     plotter.add_points(
         shape1.landmark_points[i].numpy(),
@@ -113,7 +113,7 @@ for i in range(len(shape1.landmark_indices)):
         render_points_as_spheres=True,
         point_size=25,
     )
-plotter.add_mesh(shape2.to_pyvista(), color=color_2, **kwargs)
+plotter.add_mesh(shape2.to_pyvista(), color=color_2)
 for i in range(len(shape2.landmark_indices)):
     plotter.add_points(
         shape2.landmark_points[i].numpy(),
@@ -145,6 +145,6 @@ registration.fit(source=shape2, target=shape1)
 morph = registration.transform(source=shape2)
 
 plotter = pv.Plotter()
-plotter.add_mesh(shape1.to_pyvista(), color=color_1, **kwargs)
-plotter.add_mesh(morph.to_pyvista(), color=color_2, **kwargs)
+plotter.add_mesh(shape1.to_pyvista(), color=color_1)
+plotter.add_mesh(morph.to_pyvista(), color=color_2)
 plotter.show()
