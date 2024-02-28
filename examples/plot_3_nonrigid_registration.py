@@ -111,6 +111,7 @@ plotter.show()
 # Register with `ExtrinsicDeformation`
 # ------------------------------------
 #
+# `(Draft) documentation <https://scikit-shapes.github.io/scikit-shapes/user_guide/3_multiple_shapes/a_registration/extrinsic_deformation/>`_
 
 
 # %%
@@ -170,9 +171,10 @@ plotter.show()
 
 
 # %% [markdown]
-# Register with `IntrinsicDeformation`
-# ------------------------------------
+#Register with `IntrinsicDeformation`
+#------------------------------------
 #
+# `(Draft) documentation <https://scikit-shapes.github.io/scikit-shapes/user_guide/3_multiple_shapes/a_registration/intrinsic_deformation/>`_
 
 
 # %%
