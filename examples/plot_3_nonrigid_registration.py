@@ -6,19 +6,6 @@ This notebook is an example of nonrigid registration with the registration class
 We apply nonrigid registration to a pair of 2D shapes with the same topology.
 """
 
-# %% [markdown]
-# Set the hyperparameters
-# -----------------------
-
-# %%
-kwargs = {
-    "loss": sks.L2Loss(),
-    "optimizer": sks.LBFGS(),
-    "n_iter": 5,
-    "gpu": False,
-    "verbose": True,
-}
-
 # %% [markdown]
 # Generate data
 # -------------
@@ -135,7 +122,14 @@ model = sks.ExtrinsicDeformation(
     control_points=True,
 )
 
-registration = sks.Registration(model=model, regularization_weight=0.1, **kwargs)
+registration = sks.Registration(
+    model=model,
+    loss=sks.L2Loss(),
+    optimizer=sks.LBFGS(),
+    n_iter=5,
+    verbose=True,
+    regularization_weight=0.1
+    )
 
 registration.fit(source=source, target=target)
 
@@ -190,7 +184,14 @@ model = sks.IntrinsicDeformation(
     metric=sks.AsIsometricAsPossible(),
 )
 
-registration = sks.Registration(model=model, regularization_weight=500, **kwargs)
+registration = sks.Registration(
+    model=model,
+    loss=sks.L2Loss(),
+    optimizer=sks.LBFGS(),
+    n_iter=5,
+    verbose=True,
+    regularization_weight=500
+    )
 
 registration.fit(source=source, target=target)
 
