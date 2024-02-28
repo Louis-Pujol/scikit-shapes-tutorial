@@ -9,7 +9,7 @@ A registration is defined by :
 
 - a model: the model defines the transformation to apply to the source shape (:math:`\\text{morph}`) and an associated regularization term (:math:`\\text{reg}`)
 - a loss: the loss function measures the discrepency between the target shape and the transformed source shape.
-- an weight for the regularization term: :math:`\\lambda`:.
+- a weight for the regularization term: :math:`\\lambda`:.
 
 If :math:`X` is the source shape, :math:`Y` the target shape, the criterion to optimize is:
 

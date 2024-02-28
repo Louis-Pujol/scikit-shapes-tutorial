@@ -51,8 +51,11 @@ jobs:
         - name: Setup headless display
           uses: pyvista/setup-headless-display-action@v2
 
+        # Build twice to avoid KeOps compilation messages
         - name: build documentation (pull request or push)
           run: |
+            sphinx-build -b html doc _build/
+            rm -r doc/auto_examples
             sphinx-build -b html doc _build/
 
 

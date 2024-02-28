@@ -2,9 +2,22 @@
 The `Registration` class: nonrigid registration
 ===============================================
 
-This notebook is a first example with the registration class. We apply rigid
-registration to a pair of 3D shapes with different topologies.
+This notebook is an example of nonrigid registration with the registration class.
+We apply nonrigid registration to a pair of 2D shapes with the same topology.
 """
+
+# %% [markdown]
+# Set the hyperparameters
+# -----------------------
+
+# %%
+kwargs = {
+    "loss": sks.L2Loss(),
+    "optimizer": sks.LBFGS(),
+    "n_iter": 5,
+    "gpu": False,
+    "verbose": True,
+}
 
 # %% [markdown]
 # Generate data
@@ -15,14 +28,6 @@ registration to a pair of 3D shapes with different topologies.
 import skshapes as sks
 import pyvista as pv
 import torch
-
-kwargs = {
-    "loss": sks.L2Loss(),
-    "optimizer": sks.LBFGS(),
-    "n_iter": 5,
-    "gpu": False,
-    "verbose": True,
-}
 
 
 cpos1 = [
